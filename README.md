@@ -6,7 +6,14 @@ vue手柄控制器
 
 [demo](http://meta.cunjiuyeshu.top/handle-control/index.html#/)
 
+
+
 ## 案例
+
+```bash
+npm install @liaoqinwei/vue-handle-control
+
+```
 
 disable:boolean 是否禁用
 
