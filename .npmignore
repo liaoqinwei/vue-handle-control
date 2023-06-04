@@ -1,0 +1,13 @@
+.vscode 
+
+
+node_modules 
+dist
+
+tsconfig.json
+tsconfig.lib.json
+vite.config.lib.ts
+vite.config.ts
+.gitignore
+index.html
+
