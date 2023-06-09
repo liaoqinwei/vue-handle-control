@@ -1,6 +1,6 @@
 import { Ref } from "vue-demi";
 export interface HandleControlProps {
-    eventProcessEl: HTMLElement | Window;
+    eventProcessEl?: HTMLElement | Window;
     disable: boolean;
 }
 export interface HandleControlEmits {

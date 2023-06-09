@@ -27,9 +27,9 @@ const {
 
 <style scoped>
 .handle-control-wrap {
-  display: grid;
-  grid-template: "a" 30%;
-  place-content: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   aspect-ratio: 1 / 1;
   background: radial-gradient(transparent 0%, rgba(255, 255, 255, .8) 100%);
@@ -38,7 +38,7 @@ const {
 
 .h-c-btn {
   position: relative;
-  width: 100%;
+  width: 30%;
   aspect-ratio: 1 / 1;
   background: #FFF;
   border-radius: 100%;

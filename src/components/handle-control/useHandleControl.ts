@@ -1,6 +1,6 @@
-import { Ref, onMounted, onUnmounted, reactive, ref, watch } from "vue-demi"
+import { Ref, nextTick, onMounted, onUnmounted, reactive, ref, watch } from "vue-demi"
 import gsap from "gsap"
-export interface HandleControlProps { eventProcessEl: HTMLElement | Window, disable: boolean }
+export interface HandleControlProps { eventProcessEl?: HTMLElement | Window, disable: boolean }
 
 
 export interface HandleControlEmits {
@@ -9,8 +9,8 @@ export interface HandleControlEmits {
 
 type EventObject = {
   radius: number,
-  offsetByOriginX: number, 
-  offsetByOriginY: number, 
+  offsetByOriginX: number,
+  offsetByOriginY: number,
   pageX: number,
   pageY: number,
 }
@@ -26,8 +26,9 @@ export default function (props: HandleControlProps, emits: HandleControlEmits) {
   const controlArea = { left: 0, right: 0, top: 0, bottom: 0 }
 
   const getEvent = (ev: Event): Touch | MouseEvent => {
-    if (ev instanceof TouchEvent) {
-      return ev.changedTouches[0]
+
+    if (ev.type.includes("touch")) {
+      return (ev as TouchEvent).changedTouches[0]
     } else {
       return ev as MouseEvent
     }
@@ -48,10 +49,8 @@ export default function (props: HandleControlProps, emits: HandleControlEmits) {
   const onTouchMove = (ev: Event) => {
     if (!isDraging.value) return
     const innerEvent = getEvent(ev)
-    console.log(innerEvent.pageX, innerEvent.pageY, controlArea)
     if (innerEvent.pageX < controlArea.left || innerEvent.pageX > controlArea.right ||
       innerEvent.pageY < controlArea.top || innerEvent.pageY > controlArea.bottom) {
-      console.log("out area")
       stopControl(innerEvent)
       return
     }
@@ -117,7 +116,9 @@ export default function (props: HandleControlProps, emits: HandleControlEmits) {
   }
 
   onMounted(() => {
-    calcInitPoint()
+    nextTick(() => {
+      calcInitPoint()
+    })
   })
 
 
